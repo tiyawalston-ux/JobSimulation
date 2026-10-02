@@ -10,6 +10,7 @@ import {
   type TranscriptLine,
   type WritingTask,
 } from "@/lib/careers";
+import { postJSON } from "@/lib/api";
 
 type OnDone = (answer: Answers[string]) => void;
 
@@ -127,11 +128,7 @@ export function MeetingView({
     setLoading(true);
     setError("");
     try {
-      const res = await fetch("/api/meeting", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ careerId, taskId: task.id, transcript: next }),
-      });
+      const res = await postJSON("/api/meeting", { careerId, taskId: task.id, transcript: next });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
       setTranscript([...next, ...data.lines]);

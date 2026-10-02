@@ -1,6 +1,6 @@
 import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { getCareer, inboxActions, type Answers, type Task } from "@/lib/careers";
-import { FALLBACK, MODEL, errorResponse, getClient } from "@/lib/claude";
+import { FALLBACK, MODEL, checkAccess, errorResponse, getClient } from "@/lib/claude";
 import { Report } from "@/lib/report";
 
 function describeAnswer(task: Task, answers: Answers): string {
@@ -36,6 +36,9 @@ function describeAnswer(task: Task, answers: Answers): string {
 }
 
 export async function POST(req: Request) {
+  const denied = checkAccess(req);
+  if (denied) return denied;
+
   const { careerId, answers } = (await req.json()) as { careerId: string; answers: Answers };
   const career = getCareer(careerId);
   if (!career || !career.available) {
