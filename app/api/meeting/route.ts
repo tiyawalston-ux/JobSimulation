@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { getCareer, type TranscriptLine } from "@/lib/careers";
-import { FALLBACK, MODEL, errorResponse, getClient } from "@/lib/claude";
+import { FALLBACK, MODEL, checkAccess, errorResponse, getClient } from "@/lib/claude";
 
 const MeetingReply = z.object({
   lines: z.array(z.object({ speaker: z.string(), text: z.string() })),
@@ -9,6 +9,9 @@ const MeetingReply = z.object({
 });
 
 export async function POST(req: Request) {
+  const denied = checkAccess(req);
+  if (denied) return denied;
+
   const { careerId, taskId, transcript } = (await req.json()) as {
     careerId: string;
     taskId: string;

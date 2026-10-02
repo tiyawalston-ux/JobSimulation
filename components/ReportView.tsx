@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { postJSON } from "@/lib/api";
 import type { Answers, Career } from "@/lib/careers";
 import type { ReportData } from "@/lib/report";
 
@@ -20,11 +21,7 @@ export default function ReportView({
   async function load() {
     setError("");
     try {
-      const res = await fetch("/api/report", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ careerId: career.id, answers }),
-      });
+      const res = await postJSON("/api/report", { careerId: career.id, answers });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
       setReport(data);

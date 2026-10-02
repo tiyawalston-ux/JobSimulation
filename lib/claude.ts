@@ -24,7 +24,7 @@ class MissingKeyError extends Error {}
 export function errorResponse(err: unknown): Response {
   let message = "Something went wrong talking to the AI. Please try again.";
   if (err instanceof MissingKeyError || err instanceof Anthropic.AuthenticationError) {
-    message = "The AI isn't set up yet: add a valid ANTHROPIC_API_KEY to your .env.local file, then restart the app.";
+    message = "The AI isn't set up yet: add a valid ANTHROPIC_API_KEY (in .env.local on your computer, or in Vercel settings online).";
   } else if (err instanceof Anthropic.RateLimitError) {
     message = "Too many requests right now. Wait a few seconds and try again.";
   } else if (err instanceof Anthropic.APIError) {
@@ -36,4 +36,11 @@ export function errorResponse(err: unknown): Response {
     console.error(err);
   }
   return Response.json({ error: message }, { status: 500 });
+}
+
+// Optional gate: if ACCESS_CODE is set on the server, players must enter it to use the AI.
+export function checkAccess(req: Request): Response | null {
+  const code = process.env.ACCESS_CODE;
+  if (!code || req.headers.get("x-access-code") === code) return null;
+  return Response.json({ error: "Access code required" }, { status: 401 });
 }
