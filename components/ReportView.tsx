@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Compass, Star, TrendingUp } from "lucide-react";
 import { postJSON } from "@/lib/api";
 import type { Answers, Career } from "@/lib/careers";
 import type { ReportData } from "@/lib/report";
@@ -92,11 +93,11 @@ export default function ReportView({
 
       <div className="two-col">
         <section className="card">
-          <h2>🌟 What you did well</h2>
+          <h2 className="with-icon"><Star size={20} aria-hidden="true" /> What you did well</h2>
           <ul>{report.highlights.map((h) => <li key={h}>{h}</li>)}</ul>
         </section>
         <section className="card">
-          <h2>📈 Try next time</h2>
+          <h2 className="with-icon"><TrendingUp size={20} aria-hidden="true" /> Try next time</h2>
           <ul>{report.improvements.map((h) => <li key={h}>{h}</li>)}</ul>
         </section>
       </div>
@@ -116,7 +117,7 @@ export default function ReportView({
       </section>
 
       <section className="card">
-        <h2>🧭 Explore this career for real</h2>
+        <h2 className="with-icon"><Compass size={20} aria-hidden="true" /> Explore this career for real</h2>
         <ul>{report.next_steps.map((h) => <li key={h}>{h}</li>)}</ul>
       </section>
 

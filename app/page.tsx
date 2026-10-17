@@ -1,12 +1,23 @@
 import Link from "next/link";
+import { ChartColumn, Coffee, Calendar, MessageCircle, Sparkles, Target, TrendingUp, Video } from "lucide-react";
 import { CAREERS } from "@/lib/careers";
+import CareerIcon from "@/components/CareerIcon";
 
-const FLOATERS = ["📋", "🩺", "💻", "🎨", "📣", "☕", "📅", "💬"];
+const FLOATERS = [
+  <CareerIcon key="pm" careerId="project-manager" />,
+  <CareerIcon key="rn" careerId="nurse" />,
+  <CareerIcon key="se" careerId="software-engineer" />,
+  <CareerIcon key="ux" careerId="ux-designer" />,
+  <CareerIcon key="mm" careerId="marketing-manager" />,
+  <Coffee key="coffee" />,
+  <Calendar key="cal" />,
+  <MessageCircle key="chat" />,
+];
 
 const STEPS = [
-  { emoji: "🎯", title: "Pick a career", text: "Choose a job you're curious about, from project manager to nurse." },
-  { emoji: "🎬", title: "Live the day", text: "Answer emails, join meetings with AI coworkers, and handle surprises." },
-  { emoji: "📊", title: "Get your report", text: "See your strengths, your skill scores, and whether the job fits you." },
+  { icon: Target, title: "Pick a career", text: "Choose a job you're curious about, from project manager to nurse." },
+  { icon: Video, title: "Live the day", text: "Answer emails, join meetings with AI coworkers, and handle surprises." },
+  { icon: ChartColumn, title: "Get your report", text: "See your strengths, your skill scores, and whether the job fits you." },
 ];
 
 export default function Home() {
@@ -16,14 +27,14 @@ export default function Home() {
     <main className="home">
       <section className="hero-band">
         <div className="floaters" aria-hidden="true">
-          {FLOATERS.map((e, i) => (
-            <span key={i} style={{ "--i": i } as React.CSSProperties}>{e}</span>
+          {FLOATERS.map((icon, i) => (
+            <span key={i} style={{ "--i": i } as React.CSSProperties}>{icon}</span>
           ))}
         </div>
 
         <div className="hero-inner">
           <div className="hero-copy">
-            <span className="badge">✨ {liveCount} careers to try, more coming</span>
+            <span className="badge"><Sparkles size={15} /> {liveCount} careers to try, more coming</span>
             <h1>
               Try a career <span className="underline">before</span> you choose it.
             </h1>
@@ -53,7 +64,7 @@ export default function Home() {
               <p><strong>Linda Park</strong>Okay. I&apos;m listening.</p>
             </div>
             <div className="preview-score">
-              <span>📈 Stakeholder management</span>
+              <span className="preview-skill"><TrendingUp size={16} /> Stakeholder management</span>
               <strong>8/10</strong>
             </div>
           </div>
@@ -68,7 +79,7 @@ export default function Home() {
         {STEPS.map((s, i) => (
           <div key={s.title} className="step">
             <span className="step-num">{i + 1}</span>
-            <span className="step-emoji">{s.emoji}</span>
+            <span className="step-icon"><s.icon size={24} /></span>
             <h3>{s.title}</h3>
             <p>{s.text}</p>
           </div>
@@ -83,7 +94,7 @@ export default function Home() {
             const body = (
               <>
                 <div className="career-top">
-                  <span className="career-emoji">{c.emoji}</span>
+                  <span className="career-icon"><CareerIcon careerId={c.id} size={30} /></span>
                 </div>
                 <div className="career-body">
                   <h3>{c.title}</h3>

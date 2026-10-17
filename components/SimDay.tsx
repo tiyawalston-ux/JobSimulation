@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Calendar, ChartColumn, Check, Clock, Inbox, PenLine, Video, X, Zap } from "lucide-react";
 import type { Answers, Career } from "@/lib/careers";
+import CareerIcon from "./CareerIcon";
 import { DecisionView, InboxView, MeetingView, WritingView } from "./tasks";
 import ReportView from "./ReportView";
 
 type Progress = { index: number; answers: Answers };
 
-const ICONS = { inbox: "📥", meeting: "🎥", writing: "✍️", decision: "⚡" } as const;
+const ICONS = { inbox: Inbox, meeting: Video, writing: PenLine, decision: Zap } as const;
 
 export default function SimDay({ career }: { career: Career }) {
   const storageKey = `dayone:${career.id}`;
@@ -54,7 +56,7 @@ export default function SimDay({ career }: { career: Career }) {
       <header className="topbar">
         <Link href="/" className="back">← Careers</Link>
         <div className="topbar-title">
-          <strong>{career.emoji} {career.title}</strong>
+          <strong className="topbar-career"><CareerIcon careerId={career.id} size={18} /> {career.title}</strong>
           <span>{career.company}</span>
         </div>
         {index >= 0 ? (
@@ -64,7 +66,7 @@ export default function SimDay({ career }: { career: Career }) {
             aria-expanded={scheduleOpen}
             aria-controls="schedule"
           >
-            📅 {finished ? "Report" : `${index + 1} / ${tasks.length}`}
+            <Calendar size={15} aria-hidden="true" /> {finished ? "Report" : `${index + 1} / ${tasks.length}`}
           </button>
         ) : (
           <span />
@@ -77,7 +79,7 @@ export default function SimDay({ career }: { career: Career }) {
             <div className="schedule-head">
               <p className="schedule-label">Today's schedule</p>
               <button className="schedule-close" onClick={() => setScheduleOpen(false)} aria-label="Close schedule">
-                ✕
+                <X size={20} />
               </button>
             </div>
             <ol>
@@ -86,7 +88,9 @@ export default function SimDay({ career }: { career: Career }) {
                   key={t.id}
                   className={i === index ? "current" : i < index ? "done" : ""}
                 >
-                  <span className="schedule-icon">{i < index ? "✓" : ICONS[t.type]}</span>
+                  <span className="schedule-icon">
+                    {i < index ? <Check size={18} /> : (() => { const Icon = ICONS[t.type]; return <Icon size={18} />; })()}
+                  </span>
                   <span>
                     <small>{t.time}</small>
                     {t.title}
@@ -94,7 +98,7 @@ export default function SimDay({ career }: { career: Career }) {
                 </li>
               ))}
               <li className={finished ? "current" : ""}>
-                <span className="schedule-icon">📊</span>
+                <span className="schedule-icon"><ChartColumn size={18} /></span>
                 <span>
                   <small>{career.endTime ?? "5:00 PM"}</small>
                   End-of-day report
@@ -115,7 +119,7 @@ export default function SimDay({ career }: { career: Career }) {
                 You'll work through {tasks.length} parts of a real workday. There are no perfect
                 answers. Just do what you think a good {career.title.toLowerCase()} would do.
               </p>
-              <p className="muted">⏱ About 20–30 minutes. Your progress saves automatically.</p>
+              <p className="muted with-icon"><Clock size={16} aria-hidden="true" /> About 20–30 minutes. Your progress saves automatically.</p>
               <button className="btn btn-primary" onClick={() => setProgress((p) => ({ ...p, index: 0 }))}>
                 Clock in →
               </button>

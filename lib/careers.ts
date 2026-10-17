@@ -62,7 +62,6 @@ export type Task = InboxTask | MeetingTask | WritingTask | DecisionTask;
 export type Career = {
   id: string;
   title: string;
-  emoji: string;
   colors: [string, string]; // gradient for this career's card
   tagline: string;
   available: boolean;
@@ -115,7 +114,6 @@ export const CAREERS: Career[] = [
   {
     id: "project-manager",
     title: "Project Manager",
-    emoji: "📋",
     colors: ["#6366f1", "#a855f7"],
     tagline: "Keep a team, a client, and a deadline all moving in the same direction.",
     available: true,
@@ -157,7 +155,7 @@ export const CAREERS: Career[] = [
           {
             id: "design",
             from: "Marcus (Design)",
-            subject: "New mockups for settings page 🎨",
+            subject: "New mockups for settings page",
             body: "Finished some new ideas for the settings page, including a dark mode! Would love your thoughts whenever you get a chance.",
           },
           {
@@ -236,7 +234,6 @@ export const CAREERS: Career[] = [
   {
     id: "nurse",
     title: "Registered Nurse",
-    emoji: "🩺",
     colors: ["#0d9488", "#06b6d4"],
     tagline: "Care for patients through a busy hospital shift.",
     available: true,
@@ -295,7 +292,7 @@ export const CAREERS: Career[] = [
           {
             id: "kim",
             from: "Room 418 · Ruth Kim",
-            subject: "🔔 Bed alarm",
+            subject: "Bed alarm",
             body: "Bed exit alarm is sounding. Mrs. Kim is sitting on the edge of the bed, trying to stand up.",
           },
           {
@@ -376,9 +373,9 @@ export const CAREERS: Career[] = [
       },
     ],
   },
-  { id: "software-engineer", title: "Software Engineer", emoji: "💻", colors: ["#2563eb", "#4f46e5"], tagline: "Ship features, squash bugs, and survive code review.", available: false, tasks: [] },
-  { id: "ux-designer", title: "UX Designer", emoji: "🎨", colors: ["#db2777", "#f97316"], tagline: "Turn messy user problems into simple designs.", available: false, tasks: [] },
-  { id: "marketing-manager", title: "Marketing Manager", emoji: "📣", colors: ["#ea580c", "#ca8a04"], tagline: "Launch a campaign and prove it worked.", available: false, tasks: [] },
+  { id: "software-engineer", title: "Software Engineer", colors: ["#2563eb", "#4f46e5"], tagline: "Ship features, squash bugs, and survive code review.", available: false, tasks: [] },
+  { id: "ux-designer", title: "UX Designer", colors: ["#db2777", "#f97316"], tagline: "Turn messy user problems into simple designs.", available: false, tasks: [] },
+  { id: "marketing-manager", title: "Marketing Manager", colors: ["#ea580c", "#ca8a04"], tagline: "Launch a campaign and prove it worked.", available: false, tasks: [] },
 ];
 
 export function getCareer(id: string): Career | undefined {
