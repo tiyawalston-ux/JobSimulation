@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Live a simulated day on the job before you choose a career.",
     start_url: "/",
     display: "standalone",
-    background_color: "#f7f6f3",
-    theme_color: "#4f46e5",
+    background_color: "#fbf7f2",
+    theme_color: "#f08a4b",
     icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml" }],
   };
 }

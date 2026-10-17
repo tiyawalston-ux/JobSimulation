@@ -62,7 +62,7 @@ export type Task = InboxTask | MeetingTask | WritingTask | DecisionTask;
 export type Career = {
   id: string;
   title: string;
-  colors: [string, string]; // gradient for this career's card
+  color: string; // this career's signature color (cards and icons)
   tagline: string;
   available: boolean;
   company?: string;
@@ -114,7 +114,7 @@ export const CAREERS: Career[] = [
   {
     id: "project-manager",
     title: "Project Manager",
-    colors: ["#6366f1", "#a855f7"],
+    color: "#5b55c9",
     tagline: "Keep a team, a client, and a deadline all moving in the same direction.",
     available: true,
     company: "Northwind Digital",
@@ -234,7 +234,7 @@ export const CAREERS: Career[] = [
   {
     id: "nurse",
     title: "Registered Nurse",
-    colors: ["#0d9488", "#06b6d4"],
+    color: "#1f8a75",
     tagline: "Care for patients through a busy hospital shift.",
     available: true,
     company: "Riverside General Hospital",
@@ -373,9 +373,9 @@ export const CAREERS: Career[] = [
       },
     ],
   },
-  { id: "software-engineer", title: "Software Engineer", colors: ["#2563eb", "#4f46e5"], tagline: "Ship features, squash bugs, and survive code review.", available: false, tasks: [] },
-  { id: "ux-designer", title: "UX Designer", colors: ["#db2777", "#f97316"], tagline: "Turn messy user problems into simple designs.", available: false, tasks: [] },
-  { id: "marketing-manager", title: "Marketing Manager", colors: ["#ea580c", "#ca8a04"], tagline: "Launch a campaign and prove it worked.", available: false, tasks: [] },
+  { id: "software-engineer", title: "Software Engineer", color: "#3a6bc4", tagline: "Ship features, squash bugs, and survive code review.", available: false, tasks: [] },
+  { id: "ux-designer", title: "UX Designer", color: "#c2577a", tagline: "Turn messy user problems into simple designs.", available: false, tasks: [] },
+  { id: "marketing-manager", title: "Marketing Manager", color: "#c46a2c", tagline: "Launch a campaign and prove it worked.", available: false, tasks: [] },
 ];
 
 export function getCareer(id: string): Career | undefined {
