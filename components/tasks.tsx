@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { MessageSquare, Mic, Square, Target, Volume2, VolumeX } from "lucide-react";
 import {
   inboxActions,
   type Answers,
@@ -181,14 +182,14 @@ export function MeetingView({
   return (
     <div className="stack">
       <div className="card goal">
-        <strong>🎯 Your goal:</strong> {task.goal}
+        <Target size={18} aria-hidden="true" className="inline-icon" /> <strong>Your goal:</strong> {task.goal}
       </div>
 
       <section className="call">
         <div className="call-bar">
           <span className="live-dot" /> Live · {task.title}
           <button className={`chip chip-small ${voiceOn ? "selected" : ""}`} onClick={() => setVoiceOn((v) => !v)}>
-            {voiceOn ? "🔊 Voices on" : "🔈 Voices off"}
+            {voiceOn ? <><Volume2 size={14} /> Voices on</> : <><VolumeX size={14} /> Voices off</>}
           </button>
         </div>
         <div className="tiles">
@@ -254,7 +255,7 @@ export function MeetingView({
                   aria-label={listening ? "Stop dictation" : "Speak instead of typing"}
                   disabled={loading}
                 >
-                  {listening ? "⏹" : "🎙"}
+                  {listening ? <Square size={18} /> : <Mic size={18} />}
                 </button>
               )}
               <button className="btn btn-primary" onClick={send} disabled={loading || !draft.trim()}>
@@ -317,7 +318,7 @@ export function DecisionView({ task, onDone }: { task: DecisionTask; onDone: OnD
   return (
     <div className="stack">
       <div className="card alert">
-        <small>💬 New message from {task.message.from}</small>
+        <small className="with-icon"><MessageSquare size={14} aria-hidden="true" /> New message from {task.message.from}</small>
         <p>{task.message.text}</p>
       </div>
       <div className="card">
