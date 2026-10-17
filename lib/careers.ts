@@ -63,6 +63,7 @@ export type Career = {
   id: string;
   title: string;
   emoji: string;
+  colors: [string, string]; // gradient for this career's card
   tagline: string;
   available: boolean;
   company?: string;
@@ -115,6 +116,7 @@ export const CAREERS: Career[] = [
     id: "project-manager",
     title: "Project Manager",
     emoji: "📋",
+    colors: ["#6366f1", "#a855f7"],
     tagline: "Keep a team, a client, and a deadline all moving in the same direction.",
     available: true,
     company: "Northwind Digital",
@@ -235,6 +237,7 @@ export const CAREERS: Career[] = [
     id: "nurse",
     title: "Registered Nurse",
     emoji: "🩺",
+    colors: ["#0d9488", "#06b6d4"],
     tagline: "Care for patients through a busy hospital shift.",
     available: true,
     company: "Riverside General Hospital",
@@ -373,9 +376,9 @@ export const CAREERS: Career[] = [
       },
     ],
   },
-  { id: "software-engineer", title: "Software Engineer", emoji: "💻", tagline: "Ship features, squash bugs, and survive code review.", available: false, tasks: [] },
-  { id: "ux-designer", title: "UX Designer", emoji: "🎨", tagline: "Turn messy user problems into simple designs.", available: false, tasks: [] },
-  { id: "marketing-manager", title: "Marketing Manager", emoji: "📣", tagline: "Launch a campaign and prove it worked.", available: false, tasks: [] },
+  { id: "software-engineer", title: "Software Engineer", emoji: "💻", colors: ["#2563eb", "#4f46e5"], tagline: "Ship features, squash bugs, and survive code review.", available: false, tasks: [] },
+  { id: "ux-designer", title: "UX Designer", emoji: "🎨", colors: ["#db2777", "#f97316"], tagline: "Turn messy user problems into simple designs.", available: false, tasks: [] },
+  { id: "marketing-manager", title: "Marketing Manager", emoji: "📣", colors: ["#ea580c", "#ca8a04"], tagline: "Launch a campaign and prove it worked.", available: false, tasks: [] },
 ];
 
 export function getCareer(id: string): Career | undefined {

@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from "next";
+import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
+
+const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-display", display: "swap" });
 
 export const metadata: Metadata = {
   title: "Day One — Try a Career",
@@ -18,7 +21,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={display.variable}>
       <body>{children}</body>
     </html>
   );
